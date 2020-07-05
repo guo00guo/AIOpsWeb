@@ -143,7 +143,7 @@ class XGBoost:
         重新训练数据后会更新，只更新数据
         :return:
         """
-        if update_xgboost_model(self.name, self.precision, self.recall,
+        if update_xgboost_model(self.file_name, self.name, self.precision, self.recall,
                                 self.f1, self.trained_number, self.finished,
                                 self.changed, self.lasted_update):
             print("更新成功")

@@ -184,7 +184,9 @@ def load_dataset_name_to_list():
         for line in lines:
             if line is None or line == "":
                 continue
-            redis_conn = get_redis_connection("default")
+            redis_conn = get_redis_connection("default")    #设置django缓存存放位置为redis数据库, 并设置一个默认(default)选项
+            # print(line)
+            # print(redis_conn)
             redis_conn.sadd('data_set_name', line)
 
 

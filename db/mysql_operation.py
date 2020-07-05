@@ -15,7 +15,8 @@ def connectdb():
     打开数据库连接
     :return:
     """
-    db = pymysql.connect("mysql", "root", "123", "aiops")
+    db = pymysql.connect("mysql", "root", "Customs2019", "aiops")
+    # db = pymysql.connect("192.168.23.149", "root", "123456", "aiops")
     print('已连接数据库')
     return db
 
@@ -284,7 +285,7 @@ def insert_xgboost_model(file_name, model_name, precision=0., recall=0., f1=0., 
         return False
 
 
-def update_xgboost_model(model_name, precision=0., recall=0., f1=0., trained=0, finished=0, changed=0, lasted_update=0):
+def update_xgboost_model(file_name, model_name, precision=0., recall=0., f1=0., trained=0, finished=0, changed=0, lasted_update=0):
     """
     插入xgboost训练数据到数据库表中
     :param db:
@@ -319,7 +320,7 @@ def update_xgboost_model(model_name, precision=0., recall=0., f1=0., trained=0, 
     db = connectdb()
     cursor = db.cursor()
     # sql 插入语句,确定表名，字段名（有自增字段）,和插入内容
-    sql = "UPDATE `model` set %s where `model_name` = '%s'" % (condition, model_name)
+    sql = "UPDATE `model` set %s where `model_name` = '%s' and `file_name` = '%s'" % (condition, model_name, file_name)
     print(sql)
     try:
         # 执行sql语句
@@ -365,7 +366,7 @@ def insert_lstm_model(file_name, model_name, rmse=0., lasted_predict=0, predict_
         return False
 
 
-def update_lstm_model(model_name, rmse=0., lasted_predict=0, predict_value=0, lasted_update=0):
+def update_lstm_model(file_name, model_name, rmse=0., lasted_predict=0, predict_value=0, lasted_update=0):
     """
     更新lstm模型后更新数据库表信息
     :param model_name:
@@ -390,7 +391,7 @@ def update_lstm_model(model_name, rmse=0., lasted_predict=0, predict_value=0, la
     db = connectdb()
     cursor = db.cursor()
     # sql 插入语句,确定表名，字段名（有自增字段）,和插入内容
-    sql = "UPDATE `lstm_model` set %s where `model_name` = '%s'" % (condition, model_name)
+    sql = "UPDATE `lstm_model` set %s where `model_name` = '%s' and `file_name` = '%s'" % (condition, model_name, file_name)
     print(sql)
     try:
         # 执行sql语句

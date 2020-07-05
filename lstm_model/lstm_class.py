@@ -199,7 +199,7 @@ class LSTMModel:
         重新训练数据后会更新，只更新数据
         :return:
         """
-        if update_lstm_model(self.name, self.rmse, self.lasted_predict,
+        if update_lstm_model(self.file_name, self.name, self.rmse, self.lasted_predict,
                              self.predict_str_value, self.lasted_update):
             print("更新成功")
             return True
